@@ -1,0 +1,76 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class CalculadoraTomadas extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Calculadora de Tomadas");
+
+        Label areaLabel = new Label("Digite a área em metros quadrados:");
+        TextField areaTextField = new TextField();
+
+        Label perimetroLabel = new Label("Digite o perímetro em metros:");
+        TextField perimetroTextField = new TextField();
+
+        Label resultadoLabel = new Label();
+
+        VBox vbox = new VBox(areaLabel, areaTextField, perimetroLabel, perimetroTextField, resultadoLabel);
+        Scene scene = new Scene(vbox, 300, 200);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        areaTextField.setOnAction(e -> {
+            double area = Double.parseDouble(areaTextField.getText());
+            double perimetro = Double.parseDouble(perimetroTextField.getText());
+
+            int numerodetomadas = 0;
+            int numerodetomadascozinha = 0;
+
+            if (area <= 6) {
+                resultadoLabel.setText("No mínimo uma tomada deve ser instalada nessa área.");
+            } else {
+                numerodetomadas = (int) Math.ceil(perimetro / 5);
+                resultadoLabel.setText("Devem ser instaladas " + numerodetomadas + " tomadas nessa área.");
+            }
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Resultado");
+            alert.setHeaderText(null);
+            alert.setContentText(resultadoLabel.getText());
+            alert.showAndWait();
+        });
+
+        perimetroTextField.setOnAction(e -> {
+            double area = Double.parseDouble(areaTextField.getText());
+            double perimetro = Double.parseDouble(perimetroTextField.getText());
+
+            int numerodetomadas = 0;
+            int numerodetomadascozinha = 0;
+
+            if (area <= 6) {
+                resultadoLabel.setText("No mínimo uma tomada deve ser instalada nessa área.");
+            } else {
+                numerodetomadas = (int) Math.ceil(perimetro / 5);
+                resultadoLabel.setText("Devem ser instaladas " + numerodetomadas + " tomadas nessa área.");
+            }
+
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Resultado");
+            alert.setHeaderText(null);
+            alert.setContentText(resultadoLabel.getText());
+            alert.showAndWait();
+        });
+    }
+}
